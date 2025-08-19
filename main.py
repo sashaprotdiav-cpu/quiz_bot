@@ -19,7 +19,7 @@ async def help(client, message):
 
 @bot.on_message(filters.command("quiz"))
 async def quiz(client, message):
-    await message.reply("")
+    await message.reply("13")
 
 
 print("Бот запускается...")
