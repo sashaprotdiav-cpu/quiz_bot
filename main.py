@@ -21,7 +21,8 @@ async def help(client, message):
 
 @bot.on_message(filters.command("quiz")| custom_filters.button_filter(buttons.quiz_button))
 async def quiz(client, message):
-    await message.reply("13")
+    questions = quiz_db.show_all_questions()
+    await message.reply(questions)
 
 
 print("Бот запускается...")
