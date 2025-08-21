@@ -1,4 +1,6 @@
-from pyrogram.types import KeyboardButton, InlineKeyboardButton
 from pyrogram import emoji
+from pyrogram.types import KeyboardButton
 
-start_button = KeyboardButton[f"{emoji.STAR}Старт"]
+start_button = KeyboardButton(f"{emoji.STAR}Старт")
+quiz_button = KeyboardButton(f"{emoji.RED_QUESTION_MARK}Начать квиз")
+help_button = KeyboardButton(f"{emoji.AMBULANCE}Подсказка")
