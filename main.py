@@ -87,18 +87,19 @@ async def start(client, message):
         caption="Привет! Это простой квиз. Жми /quiz, чтобы начать.",
         reply_markup=keyboard.main_keyboard,
     )
+
+
 @bot.on_message(filters.command("help") | custom_filters.button_filter(buttons.help_button))
 async def help_(client, message):
     """Подсказка — как проходить квиз."""
     await message.reply_photo(
-        photo=str("./help.png"),
-    )
-    await message.reply(
-        "/start-запускает бота \n"
-        '/quiz-начинает квиз \n'
-        "/help-расссказывает о боте \n"
-        "Нажимайте кнопки под вопросом: 'правильно' или 'неправильно'. За верный ответ +1.")
+        photo="./help.png",
+        caption="/start-запускает бота \n"
+                '/quiz-начинает квиз \n'
+                "/help-расссказывает о боте \n"
+                "Нажимайте кнопки под вопросом: 'правильно' или 'неправильно'. За верный ответ +1.",
 
+    )
 
 @bot.on_message(filters.command("quiz") | custom_filters.button_filter(buttons.quiz_button))
 async def quiz(client, message):
