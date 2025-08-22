@@ -82,16 +82,21 @@ async def start(client, message):
     """Простое приветствие и подготовка базы с вопросами."""
     quiz_db.init_db()
     quiz_db.seed_base_questions()
-    await message.reply(
-        "Привет! Это простой квиз. Жми /quiz, чтобы начать.",
+    await message.reply_photo(
+        photo=str("./quiz.jpeg"),
+        caption="Привет! Это простой квиз. Жми /quiz, чтобы начать.",
         reply_markup=keyboard.main_keyboard,
     )
-
-
 @bot.on_message(filters.command("help") | custom_filters.button_filter(buttons.help_button))
 async def help_(client, message):
     """Подсказка — как проходить квиз."""
+    await message.reply_photo(
+        photo=str("./help.png"),
+    )
     await message.reply(
+        "/start-запускает бота \n"
+        '/quiz-начинает квиз \n'
+        "/help-расссказывает о боте \n"
         "Нажимайте кнопки под вопросом: 'правильно' или 'неправильно'. За верный ответ +1.")
 
 
@@ -126,6 +131,7 @@ async def handle_answer(client, callback_query):
         await callback_query.answer("Начните квиз командой /quiz", show_alert=True)
         return
 
+
     questions = state["questions"]
     index = state["index"]
     if index >= len(questions):
@@ -147,7 +153,11 @@ async def handle_answer(client, callback_query):
     # Переходим к следующему вопросу
     state["index"] += 1
     await _send_question_or_finish(callback_query.message, user_id)
+@bot.on_message()
+async def echo(client, message):
+    await message.reply(f"Я не понимаю эту команду намижте /help")
 
 
 print("Бот запускается...")
 bot.run()
+
